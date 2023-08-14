@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OmniTrax</title>
+	<!-- Import CSS file -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<style>
+	* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: black;
+}
+
+.container {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#omnitrax {
+	position: relative;
+	height: 300px;
+	width: auto;
+	cursor: pointer;
+}
+
+#aliens {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#aliens img {
+	position: absolute;
+	height: 100px;
+	width: auto;
+	margin-top: -300px;
+	display: none;
+	z-index: 0;
+	background-color: transparent;
+
+}
+</style>
+<body>
+	<div class="container">
+		<header>
+			<h1 style="color: white;">JUST HOVER ON THE WATCH</h1>
+			<img id="omnitrax" src="./dsvv3aaqcqj51.webp">
+			<div id="aliens">
+				<img src="./i01_four-arms.png">
+				<img src="./i01_green-alien.png">
+				<img src="./i02_underwater.png">
+				<img src="./i03_xr8l.png">
+			</div>
+		</header>
+	</div>
+	<!-- Import JavaScript libraries -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+	<!-- Import custom JavaScript file -->
+	<script>
+		$(document).ready(function() {
+	// Add hover effect on OmniTrax
+	$('#omnitrax').hover(function() {
+		gsap.to('#aliens img', {
+			duration: 0.5,
+			display: 'block',
+			opacity: 1,
+			stagger: 0.1,
+			ease: 'power1.out'
+		})
+	}, function() {
+		gsap.to('#aliens img', {
+			duration: 0.3,
+			display: 'none',
+			opacity: 0,
+			ease: 'power1.in'
+		})
+	})
+
+	// Automatic image rotation
+	var index = 1;
+	setInterval(function() {
+		$('#aliens img').each(function() {
+			$(this).css('display', 'none')
+		})
+		$('#aliens img:nth-child(' + index + ')').css('display', 'block')
+		index++
+		if (index > 5) {
+			index = 1;
+		}
+	}, 5000)
+})
+
+	</script>
+</body>
+</html>
